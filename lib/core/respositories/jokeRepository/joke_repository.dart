@@ -26,14 +26,10 @@ class JokeRepository implements IJokeRepository {
 
   @override
   Future<Joke> getRandomJoke({bool nsfw = false}) async {
-    print("get");
+    print("get random joke: nsfw - $nsfw");
     final response = await http.get(endpoint, headers: _headers);
-    print("got response");
     final parsed = json.decode(response.body);
-    print("parsing");
-    final joke = Joke.fromJson(parsed);
-    print("done");
-    return joke;
+    return Joke.fromJson(parsed);
   }
 
   @override

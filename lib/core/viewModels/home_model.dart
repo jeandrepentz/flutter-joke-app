@@ -9,13 +9,20 @@ import 'package:injectable/injectable.dart';
 class HomeModel extends ChangeNotifier {
   final IJokeRepository _jokeRepository;
   List<Joke> _jokes = [];
+  bool _allowNSFW = false;
+
+  bool get allowNSFW => _allowNSFW;
+  set allowNSFW(bool value){
+    _allowNSFW = value;
+    notifyListeners();
+  }
 
   UnmodifiableListView<Joke> get jokes => UnmodifiableListView(_jokes);
   HomeModel(this._jokeRepository);
 
   Future getRandomJoke() async {
     print("getting joke");
-    final joke = await _jokeRepository.getRandomJoke();
+    final joke = await _jokeRepository.getRandomJoke(nsfw: _allowNSFW);
     print("got joke");
     print(joke.content);
     _jokes.add(joke);
