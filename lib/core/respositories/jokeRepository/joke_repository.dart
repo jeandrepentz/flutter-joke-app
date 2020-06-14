@@ -13,7 +13,7 @@ class JokeRepository implements IJokeRepository {
 
 
 //TODO: Move to a configruation
-  static const endpoint = 'https://joke3.p.rapidapi.com/v1/joke';
+  static const endpoint = "https://joke3.p.rapidapi.com/v1/joke";
   static const apiKey = "f9b61d73b9msh3217838ad61fb4bp199a63jsna2cdbe5ad428";
   final Map<String, String> _headers = _defaultHeaders();
 
@@ -27,7 +27,7 @@ class JokeRepository implements IJokeRepository {
   @override
   Future<Joke> getRandomJoke({bool nsfw = false}) async {
     print("get random joke: nsfw - $nsfw");
-    final response = await http.get(endpoint, headers: _headers);
+    final response = await http.get("$endpoint?nsfw=$nsfw", headers: _headers);
     final parsed = json.decode(response.body);
     return Joke.fromJson(parsed);
   }

@@ -15,8 +15,8 @@ class HomeView extends StatelessWidget {
         body: Consumer<HomeModel>(
           builder: (context, model, child) => CustomScrollView(
             slivers: <Widget>[
-              _sliverAppBar(model),
-              _sliverList(model),
+              _sliverAppBar(context, model),
+              _sliverList(context, model),
             ],
           ),
         ),
@@ -24,7 +24,7 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _sliverAppBar(HomeModel model) {
+  Widget _sliverAppBar(BuildContext context, HomeModel model) {
     return SliverAppBar(
       expandedHeight: 90,
       pinned: true,
@@ -36,18 +36,17 @@ class HomeView extends StatelessWidget {
             children: <Widget>[
               FlatButton(
                 color: Colors.white,
-                child: const Text("Get Random Joke"),
+                child: const Text("Get a joke"),
                 onPressed: () {
                   model.getRandomJoke();
                 },
               ),
               Row(
                 children: <Widget>[
-                  Text("NSFW"),
+                  const Text("NSFW"),
                   Switch(
                     value: model.allowNSFW,
                     onChanged: (bool value) {
-                      print(value);
                       model.allowNSFW = value;
                     },
                   )
@@ -58,7 +57,7 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _sliverList(HomeModel model) {
+  Widget _sliverList(BuildContext context, HomeModel model) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
@@ -69,38 +68,17 @@ class HomeView extends StatelessWidget {
           if (index >= model.jokes.length) {
             return null;
           }
+          final joke = model.jokes[index];
           return ListTile(
-            title: Text(model.jokes[index].content),
+            title: Text(joke.content),
+            onTap: () {
+              Navigator.pushNamed(context, '/joke', arguments: joke.id);
+            },
           );
         },
         // Or, uncomment the following line:
         // childCount: 3,
       ),
     );
-  }
-
-  List _buildList(int count) {
-    List<Widget> listItems = List();
-
-    for (int i = 0; i < count; i++) {
-      listItems.add(new Padding(padding: new EdgeInsets.all(20.0), child: new Text('Item ${i.toString()}', style: new TextStyle(fontSize: 25.0))));
-    }
-
-    return listItems;
-  }
-
-  Widget _jokeHistory(List<Joke> jokes) {
-    if (jokes == null || jokes.length == 0) {
-      return Container();
-    } else {
-      return Expanded(
-        child: ListView.builder(
-          itemCount: jokes.length,
-          itemBuilder: (context, index) => ListTile(
-            title: Text(jokes[index].content),
-          ),
-        ),
-      );
-    }
   }
 }

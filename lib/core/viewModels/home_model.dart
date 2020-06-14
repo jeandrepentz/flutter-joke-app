@@ -21,10 +21,7 @@ class HomeModel extends ChangeNotifier {
   HomeModel(this._jokeRepository);
 
   Future getRandomJoke() async {
-    print("getting joke");
     final joke = await _jokeRepository.getRandomJoke(nsfw: _allowNSFW);
-    print("got joke");
-    print(joke.content);
     _jokes.add(joke);
     notifyListeners();
   }

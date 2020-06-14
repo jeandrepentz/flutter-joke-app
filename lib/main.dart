@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_joke_app/core/dependencies/dependencyConfigurator.dart';
+import 'package:flutter_joke_app/route_generator.dart';
 import 'package:flutter_joke_app/ui/views/home_view.dart';
 import 'package:injectable/injectable.dart';
 
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeView(),
+      initialRoute: "/",
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
