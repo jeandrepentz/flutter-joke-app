@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_joke_app/core/dependencies/dependencyConfigurator.dart';
-import 'package:flutter_joke_app/core/models/joke.dart';
 import 'package:flutter_joke_app/core/viewModels/home_model.dart';
+import 'package:flutter_joke_app/ui/widgets/joke_item_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
@@ -64,17 +64,10 @@ class HomeView extends StatelessWidget {
           if (index == 0 && model.jokes.length == 0) {
             return Text("No jokes yet. Press the 'Get Random Joke Button'");
           }
-
           if (index >= model.jokes.length) {
             return null;
           }
-          final joke = model.jokes[index];
-          return ListTile(
-            title: Text(joke.content),
-            onTap: () {
-              Navigator.pushNamed(context, '/joke', arguments: joke.id);
-            },
-          );
+          return JokeItemWidget(joke: model.jokes[index]);
         },
         // Or, uncomment the following line:
         // childCount: 3,
