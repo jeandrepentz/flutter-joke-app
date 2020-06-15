@@ -1,7 +1,7 @@
 # flutter-joke-app
 A simple Flutter Demo app that integrates with a public joke API. This app is just for demo purposes.
 
-When adding a new dependncy, the following command needs to be run flutter pub run build_runner watch --delete-conflicting-outputs to re-generate the dependencyConfigurator.iconfig.dart file
+When adding a new dependency, the following command needs to be run flutter pub run build_runner watch --delete-conflicting-outputs to re-generate the dependencyConfigurator.iconfig.dart file
 
 
 Here are a few things that can be the next step to improve the application:
