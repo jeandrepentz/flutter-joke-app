@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_joke_app/core/dependencies/dependencyConfigurator.dart';
 import 'package:flutter_joke_app/core/viewModels/home_model.dart';
 import 'package:flutter_joke_app/ui/widgets/joke_item_widget.dart';
+import 'package:flutter_joke_app/ui/widgets/loader_button_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
@@ -34,11 +35,11 @@ class HomeView extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              FlatButton(
+              LoaderButtonWidget(
                 color: Colors.white,
                 child: const Text("Get a joke"),
-                onPressed: () {
-                  model.getRandomJoke();
+                onPressed: () async {
+                  await model.getRandomJoke();
                 },
               ),
               Row(
@@ -67,7 +68,7 @@ class HomeView extends StatelessWidget {
           if (index >= model.jokes.length) {
             return null;
           }
-          return JokeItemWidget(joke: model.jokes[index]);
+          return JokeItemWidget(joke: model.jokes[index], allowNSFW: model.allowNSFW,);
         },
         // Or, uncomment the following line:
         // childCount: 3,

@@ -22,7 +22,7 @@ class HomeModel extends ChangeNotifier {
 
   Future getRandomJoke() async {
     final joke = await _jokeRepository.getRandomJoke(nsfw: _allowNSFW);
-    _jokes.add(joke);
+    _jokes.insert(0, joke); //used instead of add so the newest joke is always at the top 
     notifyListeners();
   }
 }

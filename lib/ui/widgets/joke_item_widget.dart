@@ -26,28 +26,35 @@ class JokeItemWidget extends StatelessWidget {
   }
 
   Widget _mainContent() {
-    return _nsfwBlurFilter(
-        useFilter: !this.allowNSFW && joke.nsfw,
-        child: Column(
-          children: <Widget>[
-            Divider(
-              color: joke.nsfw ? Colors.red : Colors.green,
-              thickness: 3,
-            ),
-            Text(joke.content ?? ""),
-          ],
-        ));
+    return Column(
+      children: <Widget>[
+        Divider(
+          color: joke.nsfw ? Colors.red : Colors.green,
+          thickness: 3,
+        ),
+        _nsfwFilter(child: Text(joke.content ?? ""), useFilter: !allowJoke()),
+      ],
+    );
   }
 
-  Widget _nsfwBlurFilter({@required Widget child, @required bool useFilter}) {
+  Widget _nsfwFilter({@required Widget child, @required bool useFilter}) {
     if (useFilter) {
-      return BackdropFilter(filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), child: child);
+      return Text(
+        "Sensitive Content. You currently have NSFW jokes disabled",
+        style: TextStyle(fontStyle: FontStyle.italic),
+      );
     } else {
       return child;
     }
   }
 
+  bool allowJoke() {
+    return this.allowNSFW || !joke.nsfw;
+  }
+
   void _onTap(BuildContext context) {
-    Navigator.pushNamed(context, '/joke', arguments: joke.id);
+    if (allowJoke()) {
+      Navigator.pushNamed(context, '/joke', arguments: joke.id);
+    }
   }
 }

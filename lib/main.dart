@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Joke Demo App',
       theme: ThemeData(
         primarySwatch: Colors.green,
-        scaffoldBackgroundColor: Colors.grey.shade300,
-        accentColor: Colors.cyanAccent,
+        scaffoldBackgroundColor: Colors.grey.shade200,
+        accentColor: Colors.amberAccent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: "/",
