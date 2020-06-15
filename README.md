@@ -12,3 +12,4 @@ Here are a few things that can be the next step to improve the application (with
 - Move the "NSFW" setting to a settings page, that communicates with the settings repository
 - Define the Provider consumers to more specific widgets, so less get's redrawn.
 - Add error handeling, invalid response from API, no connection to the API etc.
+- Add more unit testing

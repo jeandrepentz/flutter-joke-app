@@ -6,7 +6,7 @@ import 'package:flutter_joke_app/core/respositories/jokeRepository/i_joke_respos
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
 
-@LazySingleton(as: IJokeRepository)
+@LazySingleton(as: IJokeRepository, env: Environment.dev)
 class JokeRepository implements IJokeRepository {
   //TODO: Move to a configruation
   static const endpoint = "https://joke3.p.rapidapi.com/v1/joke";
