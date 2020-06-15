@@ -63,7 +63,9 @@ class HomeView extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           if (index == 0 && model.jokes.length == 0) {
-            return Text("No jokes yet. Press the 'Get Random Joke Button'");
+            return Container(
+              margin: EdgeInsets.only(top:10),
+              child: Center(child: Text("No jokes yet. Press the 'Get a Joke' Button")));
           }
           if (index >= model.jokes.length) {
             return null;
